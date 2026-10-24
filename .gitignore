@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# SDLC & Agent Scaffolding
+.gemini/
+GEMINI.md
+.agents/
+.github/
+docs/
