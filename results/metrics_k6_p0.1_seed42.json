@@ -1,0 +1,25 @@
+{
+  "topology": {
+    "k": 6,
+    "switches": 45,
+    "hosts": 54,
+    "links": 162
+  },
+  "perturbation": {
+    "failure_rate": 0.1,
+    "failure_mode": "bernoulli",
+    "seed": 42
+  },
+  "metrics": {
+    "total_host_pairs": 1431,
+    "reachable_host_pairs": 1128,
+    "reachability_ratio": 0.7882599580712788,
+    "disconnection_ratio": 0.2117400419287212,
+    "aspl_reachable": 5.624113475177305,
+    "aspl_harmonic": 6.728840125391912,
+    "mean_redundancy": 5.466312056737588,
+    "switches_multi_failure_count": 1,
+    "switches_multi_failure_ratio": 0.022222222222222223,
+    "expected_multi_failure_count": 5.1419249999999925
+  }
+}
