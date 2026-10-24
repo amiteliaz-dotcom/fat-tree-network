@@ -3,7 +3,7 @@
 [![Python 3.14+](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
 [![Tests Passing](https://img.shields.io/badge/tests-30%2F30%20passed-brightgreen.svg)](tests/)
 [![Architecture](https://img.shields.io/badge/architecture-3--Tier%20Fat--Tree-orange.svg)](docs/SPEC.md)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 
 An academic and production-grade software framework for generating, perturbing, measuring, and visualizing **three-tier Fat-Tree (Clos) network topologies**, developed for **Course 361.2.2460: Data Communication Networks for Data Centers and AI** (Semester A - 2026).
 
