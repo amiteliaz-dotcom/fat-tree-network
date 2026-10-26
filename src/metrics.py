@@ -140,7 +140,7 @@ class MetricAnalyzer:
         if mean_harmonic_efficiency > 0.0:
             aspl_harmonic = 1.0 / mean_harmonic_efficiency
         else:
-            aspl_harmonic = 0.0
+            aspl_harmonic = float('inf')
 
         return (
             total_pairs,

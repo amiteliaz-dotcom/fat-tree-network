@@ -2,7 +2,7 @@
 
 [![Python 3.14+](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
 [![Tests Passing](https://img.shields.io/badge/tests-30%2F30%20passed-brightgreen.svg)](tests/)
-[![Architecture](https://img.shields.io/badge/architecture-3--Tier%20Fat--Tree-orange.svg)](docs/SPEC.md)
+[![Architecture](https://img.shields.io/badge/architecture-3--Tier%20Fat--Tree-orange.svg)]()
 
 
 An academic and production-grade software framework for generating, perturbing, measuring, and visualizing **three-tier Fat-Tree (Clos) network topologies**, developed for **Course 361.2.2460: Data Communication Networks for Data Centers and AI** (Semester A - 2026).
@@ -74,8 +74,8 @@ The Fat-Tree topology solves the bandwidth oversubscription bottleneck of legacy
 | **Switch Port Degree Regularity** | Exactly $k$ ports per switch | 4 | 8 | 16 |
 | **Host Degree Regularity** | Exactly 1 uplink per host | 1 | 1 | 1 |
 | **Bisection Links** | $k^3 / 8$ | 8 | 64 | 512 |
-| **Baseline Unperturbed ASPL ($p=0$)** | $\frac{2(3k^3 - k^2 - 2k - 4)}{k^3 - 4}$ | $\mathbf{\frac{82}{15} \approx 5.467}$ | $\mathbf{\approx 5.865}$ | $\mathbf{\approx 5.968}$ |
-| **Baseline Path Redundancy ($p=0$)** | Intra: 1, Pod: $k/2$, Inter: $(k/2)^2$ | $\mathbf{\frac{53}{15} \approx 3.533}$ | $\mathbf{\approx 13.56}$ | $\mathbf{\approx 57.06}$ |
+| **Baseline Unperturbed ASPL ($p=0$)** | $\frac{2(3k^3 - k^2 - 2k - 4)}{k^3 - 4}$ | $\mathbf{\frac{82}{15} \approx 5.467}$ | $\mathbf{\frac{726}{127} \approx 5.717}$ | $\mathbf{\approx 5.863}$ |
+| **Baseline Path Redundancy ($p=0$)** | Intra: 1, Pod: $k/2$, Inter: $(k/2)^2$ | $\mathbf{\frac{53}{15} \approx 3.533}$ | $\mathbf{\approx 14.51}$ | $\mathbf{\approx 60.50}$ |
 
 ### 1.1 Key Concepts & Theoretical Glossary
 
@@ -138,12 +138,6 @@ The project follows a clean architecture separating immutable domain models, gra
 
 ```text
 hw1-fat-tree/
-├── docs/                         # SDLC specifications and verification reports
-│   ├── SPEC.md                   # Stage 1: Formal mathematical specifications & invariants
-│   ├── PLAN.md                   # Stage 2: Architecture design & milestone breakdown
-│   ├── TEST_REPORT.md            # Stage 4: 30/30 test suite verification log
-│   ├── REVIEW.md                 # Stage 5: 5-dimension senior code review audit
-│   └── INTEGRATION_REPORT.md     # Stage 7: End-to-end pipeline verification report
 ├── results/                      # Generated experimental data and publication figures
 │   ├── plots/                    # High-resolution (300 DPI PNG & vector SVG) figures
 │   │   ├── aspl_vs_failure_rate.png
@@ -174,7 +168,7 @@ hw1-fat-tree/
 │   └── test_cli.py               # CLI validation rules & exit codes (AC-11, AC-12)
 ├── Homework_1-2026.pdf           # Original assignment prompt
 ├── requirements.txt              # Pinned production and test dependencies
-└── README.md                     # Comprehensive submission documentation (Stage 8)
+└── README.md                     # Comprehensive submission documentation
 ```
 
 ### 2.1 The End-to-End Simulation Pipeline ("The Pipe")
@@ -401,15 +395,15 @@ The homework requires a quantitative evaluation of non-trivial network metrics a
 #### Quantitative Ground Truth & Empirical Results
 - At $p = 0.0$ (Unperturbed):
   - $k=4$: Empirical $\text{ASPL} = \mathbf{5.466667}$ (Matches exact theoretical $82/15$).
-  - $k=6$: Empirical $\text{ASPL} = \mathbf{5.748428}$ (Matches exact theoretical closed-form).
-  - $k=8$: Empirical $\text{ASPL} = \mathbf{5.865486}$ (Matches exact theoretical closed-form).
+  - $k=6$: Empirical $\text{ASPL} = \mathbf{5.622642}$ (Matches exact theoretical $298/53$).
+  - $k=8$: Empirical $\text{ASPL} = \mathbf{5.716535}$ (Matches exact theoretical $726/127$).
 - As $p$ increases from $0.0$ to $0.20$:
   - The average shortest path length increases moderately (path dilation) from $\approx 5.47$ to $\approx 5.83$ hops ($k=4$).
   - When $p > 0.25$, network partitioning becomes dominant. As isolated pods and edge subtrees disconnect from the core, the remaining reachable pairs are predominantly **intra-edge (2 hops)** and **intra-pod (4 hops)** host pairs, which counter-intuitively stabilizes or slightly depresses the reachable ASPL metric, while the harmonic ASPL surges to over $18.0$ hops.
 
 #### Significance & Architectural Explanation
 1. **ECMP Path Redundancy Buffering:** At low failure rates ($p \le 0.10$), the Fat-Tree's multiple parallel core paths absorb link failures almost completely without disconnecting host pairs. However, traffic must frequently take sub-optimal alternative paths, leading to slight path dilation.
-2. **Resilience Across Scales:** Higher radix networks ($k=8$) start with higher baseline ASPL ($5.87$) due to a higher proportion of inter-pod pairs, but possess greater path diversity ($(k/2)^2 = 16$ core paths per inter-pod pair), providing superior structural stability under failure.
+2. **Resilience Across Scales:** Higher radix networks ($k=8$) start with higher baseline ASPL ($5.72$) due to a higher proportion of inter-pod pairs, but possess greater path diversity ($(k/2)^2 = 16$ core paths per inter-pod pair), providing superior structural stability under failure.
 
 ---
 
@@ -533,7 +527,7 @@ tests/test_visualizer.py::test_visualizer_generation PASSED              [100%]
 ============================= 30 passed in 3.51s ==============================
 ```
 
-Detailed test documentation is available in [`docs/TEST_REPORT.md`](docs/TEST_REPORT.md).
+Detailed test documentation is available in the test source files under [`tests/`](tests/).
 
 ---
 
